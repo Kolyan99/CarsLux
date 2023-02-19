@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
+import com.example.carslux.databinding.FragmentCarsBinding
 import com.example.carslux.domain.model.CarsModel
 import com.example.carslux.presentation.adapter.CarsAdapter
 import com.example.carslux.presentation.adapter.CarsListener
@@ -18,11 +19,15 @@ class CarsFragment : Fragment(), CarsListener {
 
     private lateinit var carsAdapter: CarsAdapter
 
+    private var _binding: FragmentCarsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_cars, container, false)
+    ): View {
+       _binding = FragmentCarsBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,15 +70,6 @@ class CarsFragment : Fragment(), CarsListener {
             CarsModel(R.drawable.ic_launcher_foreground,
                 "Mersedes",
                 "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic")
         )
         carsAdapter.submitList(listCars)
     }

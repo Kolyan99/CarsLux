@@ -3,7 +3,7 @@ package com.example.carslux.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carslux.R
+import com.example.carslux.databinding.CarsModelBinding
 import com.example.carslux.domain.model.CarsModel
 
 class CarsAdapter(
@@ -13,11 +13,13 @@ class CarsAdapter(
     private var listCars = mutableListOf<CarsModel>()
 
    fun submitList(list: List<CarsModel>){
+       this.listCars.clear()
        this.listCars = list.toMutableList()
+       this.notifyDataSetChanged()
    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cars_model,parent,false)
-        return CarsViewHolder(view, carsListener)
+        val binding = CarsModelBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return CarsViewHolder(binding, carsListener)
     }
 
     override fun onBindViewHolder(holder: CarsViewHolder, position: Int) {

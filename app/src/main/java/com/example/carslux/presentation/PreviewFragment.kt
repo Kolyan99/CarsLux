@@ -8,17 +8,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.carslux.R
+import com.example.carslux.databinding.FragmentPreviewBinding
+import java.util.function.Predicate
 
 
 class PreviewFragment : Fragment() {
+
+    private var _binding: FragmentPreviewBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_preview, container, false)
+    ): View {
+        _binding = FragmentPreviewBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,13 +32,12 @@ class PreviewFragment : Fragment() {
         val textView = view.findViewById<TextView>(R.id.text_prev)
         val textView2 = view.findViewById<TextView>(R.id.text_prev2)
 
-
-        val nav = view.findViewById<Button>(R.id.btn_prev)
-        nav.setOnClickListener {
+        binding.btnPrev.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.activity_container, CarsFragment())
                 .commit()
         }
+
     }
 
 
