@@ -1,19 +1,19 @@
-package com.example.carslux.presentation
+package com.example.carslux.presentation.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.example.carslux.R
+import androidx.fragment.app.viewModels
 import com.example.carslux.databinding.FragmentInformationBinding
-import com.example.carslux.databinding.FragmentPreviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class InformationFragment : Fragment() {
+
+    private val viewModel : InformationViewModel by viewModels()
 
     private var _binding: FragmentInformationBinding? = null
     private val binding get() = _binding!!

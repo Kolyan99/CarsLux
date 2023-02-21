@@ -1,4 +1,8 @@
 package com.example.carslux.domain
 
-class CarsRepository {
+import com.example.carslux.domain.model.CarsModel
+
+interface CarsRepository {
+
+    fun getCar(): List<CarsModel>
 }

@@ -1,18 +1,20 @@
-package com.example.carslux.presentation
+package com.example.carslux.presentation.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import com.example.carslux.R
 import com.example.carslux.databinding.FragmentPreviewBinding
-import java.util.function.Predicate
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PreviewFragment : Fragment() {
+
+    private val viewModel : PreviewViewModel by viewModels()
 
     private var _binding: FragmentPreviewBinding? = null
     private val binding get() = _binding!!

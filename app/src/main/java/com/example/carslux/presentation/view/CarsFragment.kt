@@ -1,21 +1,24 @@
-package com.example.carslux.presentation
+package com.example.carslux.presentation.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
 import com.example.carslux.databinding.FragmentCarsBinding
-import com.example.carslux.domain.model.CarsModel
 import com.example.carslux.presentation.adapter.CarsAdapter
 import com.example.carslux.presentation.adapter.CarsListener
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CarsFragment : Fragment(), CarsListener {
+
+   private val viewModel: CarsViewModel by viewModels()
 
     private lateinit var carsAdapter: CarsAdapter
 
@@ -38,50 +41,26 @@ class CarsFragment : Fragment(), CarsListener {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = carsAdapter
 
+        viewModel.getCars()
 
-        val listCars = listOf<CarsModel>(
-            CarsModel(R.drawable.ic_launcher_background,
-            "Mersedes",
-            "E63 AMG"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-            "Mersedes",
-            "E220"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-            "Mersedes",
-            "CLS 550"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-            "Mersedes",
-            "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-            CarsModel(R.drawable.ic_launcher_foreground,
-                "Mersedes",
-                "S550 4Matic"),
-        )
-        carsAdapter.submitList(listCars)
+        viewModel.cars.observe(viewLifecycleOwner){ listCar ->
+            carsAdapter.submitList(listCar)
+        }
+
+        viewModel.msg.observe(viewLifecycleOwner){ msg->
+            Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onClick() {
-        Toast.makeText(context, "Image cliked", Toast.LENGTH_SHORT).show()
+       viewModel.imageViewClicked()
     }
 
     override fun onElementSelect(name: Int, model: String, image: String) {
     val informationFragment = InformationFragment()
         val bundel = Bundle()
-        bundel.putInt("name", name)
+        bundel.putString("name", name.toString())
         bundel.putString("model", model)
         bundel.putString("image", image)
         informationFragment.arguments = bundel

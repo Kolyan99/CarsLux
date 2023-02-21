@@ -10,16 +10,17 @@ class CarsViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(CarsModel: CarsModel) {
-        binding.image.text = CarsModel.image.toString()
-        binding.name.text = CarsModel.name
+    fun bind(carsModel: CarsModel) {
+        binding.image.setBackgroundResource(carsModel.image)
+        binding.name.setText(carsModel.name)
+
 
 
         itemView.setOnClickListener {
             carsListener.onElementSelect(
-                CarsModel.image,
-                CarsModel.name,
-                CarsModel.model,
+                carsModel.image,
+                carsModel.name,
+                carsModel.model,
             )
         }
     }

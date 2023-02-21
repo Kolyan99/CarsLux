@@ -1,15 +1,19 @@
 package com.example.carslux.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
 import com.example.carslux.R
 import com.example.carslux.databinding.ActivityMainBinding
+import com.example.carslux.presentation.view.PreviewFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel : MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
