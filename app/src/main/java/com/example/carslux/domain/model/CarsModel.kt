@@ -1,7 +1,8 @@
 package com.example.carslux.domain.model
 
 data class CarsModel (
-    val image: Int,
-    val name: String,
-    val model: String
+    val id: Int,
+    val modelCar: String,
+    val imageCar: String,
+    val engine: String
         )

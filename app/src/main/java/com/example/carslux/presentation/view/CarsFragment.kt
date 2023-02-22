@@ -10,6 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
+import com.example.carslux.Utils.Constants.ENGINE
+import com.example.carslux.Utils.Constants.IMAGECAR
+import com.example.carslux.Utils.Constants.MODELCAR
 import com.example.carslux.databinding.FragmentCarsBinding
 import com.example.carslux.presentation.adapter.CarsAdapter
 import com.example.carslux.presentation.adapter.CarsListener
@@ -18,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CarsFragment : Fragment(), CarsListener {
 
-   private val viewModel: CarsViewModel by viewModels()
+    private val viewModel: CarsViewModel by viewModels()
 
     private lateinit var carsAdapter: CarsAdapter
 
@@ -29,7 +32,7 @@ class CarsFragment : Fragment(), CarsListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       _binding = FragmentCarsBinding.inflate(inflater)
+        _binding = FragmentCarsBinding.inflate(inflater)
         return binding.root
     }
 
@@ -43,33 +46,45 @@ class CarsFragment : Fragment(), CarsListener {
 
         viewModel.getCars()
 
-        viewModel.cars.observe(viewLifecycleOwner){ listCar ->
+        viewModel.cars.observe(viewLifecycleOwner) { listCar ->
             carsAdapter.submitList(listCar)
         }
 
-        viewModel.msg.observe(viewLifecycleOwner){ msg->
+        viewModel.msg.observe(viewLifecycleOwner) { msg ->
             Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
         }
 
+
+        viewModel.bundel.observe(viewLifecycleOwner) { navBundel ->
+            if (navBundel!= null) {
+                val bundle = Bundle()
+                val informationFragment = InformationFragment()
+                bundle.putString(MODELCAR, navBundel.modelCar)
+                bundle.putString(IMAGECAR, navBundel.imageCar)
+                bundle.putString(ENGINE, navBundel.enegine)
+                informationFragment.arguments = bundle
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.activity_container, InformationFragment())
+                    .commit()
+                viewModel.userNavigated()
+
+            }
+        }
     }
 
     override fun onClick() {
-       viewModel.imageViewClicked()
+        viewModel.imageViewClicked()
     }
 
-    override fun onElementSelect(name: Int, model: String, image: String) {
-    val informationFragment = InformationFragment()
-        val bundel = Bundle()
-        bundel.putString("name", name.toString())
-        bundel.putString("model", model)
-        bundel.putString("image", image)
-        informationFragment.arguments = bundel
-        parentFragmentManager
-            .beginTransaction()
-            .replace(R.id.activity_container, InformationFragment())
-            .commit()
-
-
-
+    override fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String) {
+        viewModel.elementSelect(id, modelCar, imageCar, engine)
     }
+
+
 }
+
+
+
+
+

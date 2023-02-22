@@ -1,12 +1,21 @@
 package com.example.carslux.presentation.view
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
+import com.example.carslux.R
+import com.example.carslux.Utils.Constants
+import com.example.carslux.Utils.Constants.ENGINE
+import com.example.carslux.Utils.Constants.IMAGECAR
+import com.example.carslux.Utils.Constants.MODELCAR
 import com.example.carslux.databinding.FragmentInformationBinding
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,16 +40,25 @@ class InformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.infoName.findViewById<TextView>(R.id.info_name)
+        binding.infoImage.findViewById<ImageView>(R.id.info_image)
+        binding.infoModel.findViewById<TextView>(R.id.info_model)
 
-        val bundel = arguments
-        bundel?.let { safebundel ->
+        val bundle = arguments
+        bundle?.let { safebundel ->
+            val modelcar = safebundel.getString(MODELCAR)
+            val image = safebundel.getString(IMAGECAR)
+            val model = safebundel.getString(ENGINE)
 
-            val image = safebundel.getString("image")
-            val name = safebundel.getInt("name")
-            val model = safebundel.getString("model")
 
-            binding.infoName.text = name.toString()
-            binding.infoImage.drawable
+
+
+            binding.infoName.text = modelcar
+            binding.infoModel.text = model
+            Picasso.get().load(Uri.parse(image)).into(binding.infoImage)
+
+
+
 
 
         }

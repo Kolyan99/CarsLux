@@ -4,5 +4,5 @@ import com.example.carslux.domain.model.CarsModel
 
 interface CarsRepository {
 
-    fun getCar(): List<CarsModel>
+   suspend fun getCar(): List<CarsModel>
 }

@@ -44,6 +44,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="148dp"
         android:text="Lets Start"
+        android:backgroundTint="#79278C"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

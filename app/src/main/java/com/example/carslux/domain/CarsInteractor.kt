@@ -8,7 +8,7 @@ class CarsInteractor @Inject constructor(
     private val carsRepository: CarsRepository
 ) {
 
-    fun getCars(): List<CarsModel> {
+    suspend fun getCars(): List<CarsModel> {
         return carsRepository.getCar()
     }
 }
