@@ -42,13 +42,14 @@ class CarsViewModel @Inject constructor(
         _msg.value = R.string.Click_on_picture
     }
 
-    fun userNavigated(){
-        _bundel.value = null
-    }
 
     fun elementSelect(id: Int, modelCar: String, imageCar: String, engine: String){
         _bundel.value = NavigateParametrs(
             id,modelCar, imageCar, engine)
+    }
+
+    fun userNavigated(){
+        _bundel.value = null
     }
 }
 

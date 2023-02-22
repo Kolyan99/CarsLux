@@ -46,9 +46,9 @@ class InformationFragment : Fragment() {
 
         val bundle = arguments
         bundle?.let { safebundel ->
-            val modelcar = safebundel.getString(MODELCAR)
-            val image = safebundel.getString(IMAGECAR)
-            val model = safebundel.getString(ENGINE)
+            val modelcar = safebundel.getString(Constants.MODELCAR)
+            val image = safebundel.getString(Constants.IMAGECAR)
+            val model = safebundel.getString(Constants.ENGINE)
 
 
 

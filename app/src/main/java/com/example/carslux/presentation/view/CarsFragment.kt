@@ -54,21 +54,20 @@ class CarsFragment : Fragment(), CarsListener {
             Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
         }
 
-
         viewModel.bundel.observe(viewLifecycleOwner) { navBundel ->
             if (navBundel!= null) {
-                val bundle = Bundle()
                 val informationFragment = InformationFragment()
+                val bundle = Bundle()
                 bundle.putString(MODELCAR, navBundel.modelCar)
                 bundle.putString(IMAGECAR, navBundel.imageCar)
                 bundle.putString(ENGINE, navBundel.enegine)
                 informationFragment.arguments = bundle
                 parentFragmentManager
                     .beginTransaction()
-                    .replace(R.id.activity_container, InformationFragment())
+                    .replace(R.id.activity_container, informationFragment)
                     .commit()
-                viewModel.userNavigated()
 
+                viewModel.userNavigated()
             }
         }
     }
