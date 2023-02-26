@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
-import com.example.carslux.Utils.Constants.ENGINE
-import com.example.carslux.Utils.Constants.IMAGECAR
-import com.example.carslux.Utils.Constants.MODELCAR
+import com.example.carslux.utils.Constants.ENGINE
+import com.example.carslux.utils.Constants.IMAGECAR
+import com.example.carslux.utils.Constants.MODELCAR
 import com.example.carslux.databinding.FragmentCarsBinding
 import com.example.carslux.presentation.adapter.CarsAdapter
 import com.example.carslux.presentation.adapter.CarsListener
+import com.example.carslux.utils.Constants.INFORMATIONMACHINES
+import com.example.carslux.utils.Constants.PHOTO
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,6 +63,8 @@ class CarsFragment : Fragment(), CarsListener {
                 bundle.putString(MODELCAR, navBundel.modelCar)
                 bundle.putString(IMAGECAR, navBundel.imageCar)
                 bundle.putString(ENGINE, navBundel.enegine)
+                bundle.putString(INFORMATIONMACHINES, navBundel.informationMachines)
+                bundle.putString(PHOTO, navBundel.photo)
                 informationFragment.arguments = bundle
                 parentFragmentManager
                     .beginTransaction()
@@ -76,11 +80,9 @@ class CarsFragment : Fragment(), CarsListener {
         viewModel.imageViewClicked()
     }
 
-    override fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String) {
-        viewModel.elementSelect(id, modelCar, imageCar, engine)
+    override fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String, informationMachines: String, photo: String) {
+        viewModel.elementSelect(id, modelCar, imageCar, engine, informationMachines, photo)
     }
-
-
 }
 
 

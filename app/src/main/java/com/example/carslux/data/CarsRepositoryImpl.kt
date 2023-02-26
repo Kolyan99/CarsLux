@@ -16,7 +16,7 @@ class CarsRepositoryImpl @Inject constructor(
             val response = apiService.getCar()
              response.body()?.sampleList?.let {
                 it.map {
-                    CarsModel(it.id, it.modelCar, it.imageCar, it.engine)
+                    CarsModel(it.id, it.modelCar, it.imageCar, it.engine, it.informationMachines,it.photo)
                 }
             } ?: kotlin.run {
                 emptyList()
@@ -28,58 +28,4 @@ class CarsRepositoryImpl @Inject constructor(
 
 
 
-
-//        val listCars = listOf<CarsModel>(
-//            CarsModel(
-//                R.drawable.ic_launcher_background,
-//                "Mersedes",
-//                "E63 AMG"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Mazda",
-//                "626"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Toyota",
-//                "Camry"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Nissan",
-//                "Almera"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Opel",
-//                "Astra"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "BMV",
-//                "540I"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Audi",
-//                "Rs5"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Mersedes",
-//                "S550 4Matic"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Mersedes",
-//                "S550 4Matic"
-//            ),
-//            CarsModel(
-//                R.drawable.ic_launcher_foreground,
-//                "Mersedes",
-//                "S550 4Matic"
-//            )
-//        )
-//        return (listCars)
 

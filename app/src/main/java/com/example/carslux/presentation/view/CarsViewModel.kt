@@ -43,9 +43,9 @@ class CarsViewModel @Inject constructor(
     }
 
 
-    fun elementSelect(id: Int, modelCar: String, imageCar: String, engine: String){
+    fun elementSelect(id: Int, modelCar: String, imageCar: String, engine: String, informationMachines: String, photo: String){
         _bundel.value = NavigateParametrs(
-            id,modelCar, imageCar, engine)
+            id,modelCar, imageCar, engine, informationMachines,photo )
     }
 
     fun userNavigated(){
@@ -57,5 +57,7 @@ data class NavigateParametrs(
     val id: Int,
     val modelCar: String,
     val imageCar: String,
-    val enegine: String
+    val enegine: String,
+    val informationMachines: String,
+    val photo: String
 )

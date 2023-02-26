@@ -31,16 +31,18 @@ class CarsViewHolder(
             carsModel.modelCar
             carsModel.imageCar
             carsModel.engine
+            carsModel.informationMachines
+            carsModel.photo
         }
-
-
 
         itemView.setOnClickListener {
             carsListener.onElementSelect(
                 carsModel.id,
                 carsModel.modelCar,
                 carsModel.imageCar,
-                carsModel.engine
+                carsModel.engine,
+                carsModel.informationMachines,
+                carsModel.photo
             )
         }
     }

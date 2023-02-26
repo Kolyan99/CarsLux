@@ -4,5 +4,5 @@ interface CarsListener {
 
     fun onClick()
 
-    fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String)
+    fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String, informationMachines: String, photo: String)
 }
