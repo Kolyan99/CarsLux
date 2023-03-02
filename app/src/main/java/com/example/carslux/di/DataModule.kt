@@ -1,13 +1,12 @@
 package com.example.carslux.di
 
-import com.example.carslux.data.CarsRepositoryImpl
+import com.example.carslux.data.repository.CarsRepositoryImpl
 import com.example.carslux.data.service.ApiService
 import com.example.carslux.domain.CarsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,9 +23,7 @@ abstract class DataModule {
 
 
     companion object {
-
         private const val BASE_URL = "https://api.jsonserve.com"
-
 
         @Provides
         fun providesApiService(retrofit: Retrofit): ApiService {

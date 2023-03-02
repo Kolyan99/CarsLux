@@ -57,7 +57,7 @@ class CarsFragment : Fragment(), CarsListener {
         }
 
         viewModel.bundel.observe(viewLifecycleOwner) { navBundel ->
-            if (navBundel!= null) {
+            if (navBundel != null) {
                 val informationFragment = InformationFragment()
                 val bundle = Bundle()
                 bundle.putString(MODELCAR, navBundel.modelCar)
@@ -80,8 +80,19 @@ class CarsFragment : Fragment(), CarsListener {
         viewModel.imageViewClicked()
     }
 
-    override fun onElementSelect(id: Int, modelCar: String, imageCar: String, engine: String, informationMachines: String, photo: String) {
+    override fun onElementSelect(
+        id: Int,
+        modelCar: String,
+        imageCar: String,
+        engine: String,
+        informationMachines: String,
+        photo: String
+    ) {
         viewModel.elementSelect(id, modelCar, imageCar, engine, informationMachines, photo)
+    }
+
+    override fun onDeleteCar(id: Int) {
+        viewModel.deleteCar(id)
     }
 }
 

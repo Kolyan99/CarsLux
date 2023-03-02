@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class InformationFragment : Fragment() {
 
-    private val viewModel : InformationViewModel by viewModels()
+    private val viewModel: InformationViewModel by viewModels()
 
     private var _binding: FragmentInformationBinding? = null
     private val binding get() = _binding!!
@@ -37,11 +37,6 @@ class InformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.infoName.findViewById<TextView>(R.id.info_name)
-        binding.infoImage.findViewById<ImageView>(R.id.info_image)
-        binding.infoModel.findViewById<TextView>(R.id.info_model)
-        binding.informationmachince.findViewById<TextView>(R.id.informationmachince)
-        binding.infoPhoto.findViewById<ImageView>(R.id.info_photo)
 
         val bundle = arguments
         bundle?.let { safebundel ->
@@ -57,9 +52,6 @@ class InformationFragment : Fragment() {
             Picasso.get().load(Uri.parse(image)).into(binding.infoImage)
             binding.informationmachince.text = infomachince
             Picasso.get().load(Uri.parse(photo)).into(binding.infoPhoto)
-
-
-
 
 
         }

@@ -16,15 +16,8 @@ class CarsViewHolder(
 
 
     fun bind(carsModel: CarsModel) {
-        binding.carImage.findViewById<ImageView>(R.id.car_image)
-        binding.name.findViewById<TextView>(R.id.name)
-        binding.model.findViewById<TextView>(R.id.model)
-
         binding.name.text = carsModel.modelCar
-        binding.model.text = carsModel.engine
         Picasso.get().load(Uri.parse(carsModel.imageCar)).into(binding.carImage)
-
-
 
         binding.carImage.setOnClickListener {
             carsListener.onClick()
@@ -44,6 +37,10 @@ class CarsViewHolder(
                 carsModel.informationMachines,
                 carsModel.photo
             )
+        }
+
+        binding.carDelete.setOnClickListener {
+            carsListener.onDeleteCar(carsModel.id)
         }
     }
 }

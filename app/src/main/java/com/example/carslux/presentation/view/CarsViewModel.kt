@@ -30,7 +30,8 @@ class CarsViewModel @Inject constructor(
     fun getCars(){
         viewModelScope.launch {
             try {
-                val listCars = carsInteractor.getCars()
+                carsInteractor.getCars()
+                val listCars = carsInteractor.showCars()
                 _cars.value = listCars
             }catch (e: Exception){
 
@@ -50,6 +51,12 @@ class CarsViewModel @Inject constructor(
 
     fun userNavigated(){
         _bundel.value = null
+    }
+
+    fun deleteCar(id: Int){
+        viewModelScope.launch {
+            carsInteractor.deleteCar(id)
+        }
     }
 }
 

@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PreviewFragment : Fragment() {
 
-    private val viewModel : PreviewViewModel by viewModels()
+    private val viewModel: PreviewViewModel by viewModels()
 
     private var _binding: FragmentPreviewBinding? = null
     private val binding get() = _binding!!
@@ -31,16 +31,10 @@ class PreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView = view.findViewById<TextView>(R.id.text_prev)
-        val textView2 = view.findViewById<TextView>(R.id.text_prev2)
-
         binding.btnPrev.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.activity_container, CarsFragment())
                 .commit()
         }
-
     }
-
-
 }

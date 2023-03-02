@@ -57,12 +57,16 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-
-
 //    Hilt
     kapt 'com.google.dagger:hilt-android-compiler:2.43.2'
     kapt 'androidx.hilt:hilt-common:1.0.0'
     implementation 'com.google.dagger:hilt-android:2.43.2'
     implementation 'androidx.hilt:hilt-work:1.0.0'
+
+    //DataBase
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-runtime:2.4.0-alpha04"
+    implementation "androidx.room:room-ktx:2.4.0-alpha04"
+
 
 }
