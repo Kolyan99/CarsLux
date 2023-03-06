@@ -58,6 +58,12 @@ class CarsViewModel @Inject constructor(
             carsInteractor.deleteCar(id)
         }
     }
+
+    fun onFavClick(id: Int){
+        viewModelScope.launch {
+            carsInteractor.onFavClick(id)
+        }
+    }
 }
 
 data class NavigateParametrs(

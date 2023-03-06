@@ -42,6 +42,10 @@ class CarsViewHolder(
         binding.carDelete.setOnClickListener {
             carsListener.onDeleteCar(carsModel.id)
         }
+
+        binding.carFav.setOnClickListener {
+            carsListener.onFavClick(carsModel.id)
+        }
     }
 }
 

@@ -94,6 +94,10 @@ class CarsFragment : Fragment(), CarsListener {
     override fun onDeleteCar(id: Int) {
         viewModel.deleteCar(id)
     }
+
+    override fun onFavClick(id: Int) {
+        viewModel.onFavClick(id)
+    }
 }
 
 

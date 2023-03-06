@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.carslux.data.database.CarsEntity
 
-@Database(entities = [CarsEntity::class], version = 1, exportSchema = false)
+@Database(entities = [CarsEntity::class, FavoritesEntity::class], version = 1, exportSchema = false)
 abstract class CarsDataBase: RoomDatabase() {
 
     abstract fun getCarsDAO(): CarsDao
