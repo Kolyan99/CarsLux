@@ -1,4 +1,4 @@
-package com.example.carslux.presentation.adapter
+package com.example.carslux.presentation.adapter.favorit
 
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +12,14 @@ class FavoritesViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(carsModel: FavoriteModel) {
-        binding.favName.text = carsModel.modelCar
-        Picasso.get().load(Uri.parse(carsModel.imageCar)).into(binding.favImage)
+    fun bind(favorite: FavoriteModel) {
+        binding.favNameFav.text = favorite.modelCar
+        Picasso.get().load(Uri.parse(favorite.imageCar)).into(binding.favImageFav)
 
-
-
-
+        binding.favDeleteFav.setOnClickListener {
+            favoritesListener.onDeleteFavorite(favorite.id)
+        }
     }
+
 }
 

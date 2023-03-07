@@ -34,4 +34,8 @@ class CarsInteractor @Inject constructor(
         return carsRepository.getFavorites()
     }
 
+    suspend fun deleteFavorite(id: Int){
+        carsRepository.deleteFavorite(id)
+    }
+
 }

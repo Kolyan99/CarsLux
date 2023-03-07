@@ -1,4 +1,4 @@
-package com.example.carslux.presentation.adapter
+package com.example.carslux.presentation.adapter.cars
 
 interface CarsListener {
 

@@ -58,7 +58,7 @@ class InformationFragment : Fragment() {
 
         binding.buttonFav.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.activity_container, FavoritesFragment())
+                .replace(R.id.activity_container, FavoritesFragment())
                 .commit()
         }
     }

@@ -1,10 +1,7 @@
-package com.example.carslux.presentation.adapter
+package com.example.carslux.presentation.adapter.cars
 
 import android.net.Uri
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carslux.R
 import com.example.carslux.databinding.CarsModelBinding
 import com.example.carslux.domain.model.CarsModel
 import com.squareup.picasso.Picasso

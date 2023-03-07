@@ -102,6 +102,12 @@ class CarsRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun deleteFavorite(id: Int) {
+        withContext(Dispatchers.IO){
+            carsDao.deleteFavoritesEntityId(id)
+        }
+    }
 }
 
 

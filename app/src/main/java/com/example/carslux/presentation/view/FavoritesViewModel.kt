@@ -29,4 +29,10 @@ class FavoritesViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteFavorite(id: Int){
+        viewModelScope.launch {
+            carsInteractor.deleteFavorite(id)
+        }
+    }
 }

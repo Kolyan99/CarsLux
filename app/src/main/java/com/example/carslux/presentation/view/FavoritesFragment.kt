@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carslux.databinding.FragmentFavoritesBinding
-import com.example.carslux.presentation.adapter.FavoritesAdapter
-import com.example.carslux.presentation.adapter.FavoritesListener
+import com.example.carslux.presentation.adapter.favorit.FavoritesAdapter
+import com.example.carslux.presentation.adapter.favorit.FavoritesListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,6 +43,10 @@ class FavoritesFragment : Fragment(), FavoritesListener {
             favoritesAdapter.submitList(it)
         }
 
+    }
+
+    override fun onDeleteFavorite(id: Int) {
+        viewModel.deleteFavorite(id)
     }
 
 

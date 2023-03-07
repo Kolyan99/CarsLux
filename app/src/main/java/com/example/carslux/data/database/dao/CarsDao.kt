@@ -26,10 +26,14 @@ interface CarsDao {
     @Query("SELECT * FROM CarsEntity WHERE id =:id ")
     fun findItemEntityById(id: Int): CarsEntity
 
-    @Insert(onConflict = IGNORE) // ignore when conflict occurs (ignore items if same)
+    @Insert(onConflict = IGNORE)
     fun insertFavoritesEntity(favoritesEntity: FavoritesEntity)
 
     @Query("SELECT * FROM FavoritesEntity ")
     fun getFavoritesEntities(): List<FavoritesEntity>
+
+    @Query("DELETE FROM FavoritesEntity WHERE id =:id")
+    fun deleteFavoritesEntityId(id: Int)
+
 
 }

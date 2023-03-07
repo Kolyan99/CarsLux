@@ -1,4 +1,4 @@
-package com.example.carslux.presentation.adapter
+package com.example.carslux.presentation.adapter.cars
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

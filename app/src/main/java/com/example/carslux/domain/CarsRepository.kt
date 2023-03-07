@@ -16,4 +16,6 @@ interface CarsRepository {
    suspend fun favClick(carsModel: CarsModel)
 
    suspend fun getFavorites(): List<FavoriteModel>
+
+   suspend fun deleteFavorite(id: Int)
 }

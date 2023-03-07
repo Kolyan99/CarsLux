@@ -14,8 +14,8 @@ import com.example.carslux.utils.Constants.ENGINE
 import com.example.carslux.utils.Constants.IMAGECAR
 import com.example.carslux.utils.Constants.MODELCAR
 import com.example.carslux.databinding.FragmentCarsBinding
-import com.example.carslux.presentation.adapter.CarsAdapter
-import com.example.carslux.presentation.adapter.CarsListener
+import com.example.carslux.presentation.adapter.cars.CarsAdapter
+import com.example.carslux.presentation.adapter.cars.CarsListener
 import com.example.carslux.utils.Constants.INFORMATIONMACHINES
 import com.example.carslux.utils.Constants.PHOTO
 import dagger.hilt.android.AndroidEntryPoint
