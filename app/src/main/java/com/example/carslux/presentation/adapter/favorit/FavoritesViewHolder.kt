@@ -19,6 +19,17 @@ class FavoritesViewHolder(
         binding.favDeleteFav.setOnClickListener {
             favoritesListener.onDeleteFavorite(favorite.id)
         }
+
+        itemView.setOnClickListener {
+            favoritesListener.onElementSelect(
+                favorite.id,
+                favorite.modelCar,
+                favorite.imageCar,
+                favorite.engine,
+                favorite.informationMachines,
+                favorite.photo
+            )
+        }
     }
 
 }

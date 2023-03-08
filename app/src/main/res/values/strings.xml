@@ -6,4 +6,6 @@
     <string name="name_top">TOP-15</string>
     <string name="button">Lets Start</string>
     <string name="text_preview">Luxury Cars from USA</string>
+    <string name="cars">Cars</string>
+    <string name="favorite">Favorite</string>
 </resources>
