@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CarsLux</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Click_on_picture">You clicked on the picture</string>
+    <string name="name_top">TOP-15</string>
+    <string name="button">Lets Start</string>
+    <string name="text_preview">Luxury Cars from USA</string>
 </resources>

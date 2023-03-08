@@ -1,21 +1,28 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
 }
-
 android {
     namespace 'com.example.carslux'
-    compileSdk 32
+    compileSdk 33
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId "com.example.carslux"
         minSdk 30
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -41,4 +48,25 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+//    Hilt
+    kapt 'com.google.dagger:hilt-android-compiler:2.43.2'
+    kapt 'androidx.hilt:hilt-common:1.0.0'
+    implementation 'com.google.dagger:hilt-android:2.43.2'
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+
+    //DataBase
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-runtime:2.4.0-alpha04"
+    implementation "androidx.room:room-ktx:2.4.0-alpha04"
+
+
 }
