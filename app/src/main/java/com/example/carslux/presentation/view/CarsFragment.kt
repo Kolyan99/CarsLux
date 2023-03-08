@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
@@ -18,6 +19,7 @@ import com.example.carslux.presentation.adapter.cars.CarsAdapter
 import com.example.carslux.presentation.adapter.cars.CarsListener
 import com.example.carslux.utils.Constants.INFORMATIONMACHINES
 import com.example.carslux.utils.Constants.PHOTO
+import com.example.carslux.utils.NavHelper.navigateWithBundle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,19 +60,16 @@ class CarsFragment : Fragment(), CarsListener {
 
         viewModel.bundel.observe(viewLifecycleOwner) { navBundel ->
             if (navBundel != null) {
-                val informationFragment = InformationFragment()
                 val bundle = Bundle()
                 bundle.putString(MODELCAR, navBundel.modelCar)
                 bundle.putString(IMAGECAR, navBundel.imageCar)
                 bundle.putString(ENGINE, navBundel.enegine)
                 bundle.putString(INFORMATIONMACHINES, navBundel.informationMachines)
                 bundle.putString(PHOTO, navBundel.photo)
-                informationFragment.arguments = bundle
-                parentFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.activity_container, informationFragment)
-                    .commit()
-
+                navigateWithBundle(
+                    navBundel.destinationId,
+                    bundle
+                )
                 viewModel.userNavigated()
             }
         }

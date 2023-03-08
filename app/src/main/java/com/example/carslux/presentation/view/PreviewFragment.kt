@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.carslux.R
 import com.example.carslux.databinding.FragmentPreviewBinding
+import com.example.carslux.utils.NavHelper.navigateWithDeleteBackStack
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,10 +33,19 @@ class PreviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.nav.observe(viewLifecycleOwner) {
+            if (it != null) {
+                navigateWithDeleteBackStack(
+                    it.destinationId,
+                    it.removeFragment
+                )
+            }
+
+        }
         binding.btnPrev.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.activity_container, CarsFragment())
-                .commit()
+            viewModel.previewButtonClick()
+
         }
     }
 }
+

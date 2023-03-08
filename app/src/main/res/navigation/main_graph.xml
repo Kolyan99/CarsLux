@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/previewFragment">
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.example.carslux.presentation.view.PreviewFragment"
+        android:label="fragment_preview"
+        tools:layout="@layout/fragment_preview" >
+        <action
+            android:id="@+id/action_previewFragment_to_carsFragment2"
+            app:destination="@id/carsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/carsFragment2"
+        android:name="com.example.carslux.presentation.view.CarsFragment"
+        android:label="fragment_cars"
+        tools:layout="@layout/fragment_cars" >
+        <action
+            android:id="@+id/action_carsFragment2_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.carslux.presentation.view.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.carslux.presentation.view.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+</navigation>
