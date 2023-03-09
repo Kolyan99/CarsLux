@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carslux.databinding.FragmentFavoritesBinding
+import com.example.carslux.domain.model.FavoriteModel
 import com.example.carslux.presentation.adapter.favorit.FavoritesAdapter
 import com.example.carslux.presentation.adapter.favorit.FavoritesListener
 import com.example.carslux.utils.Constants
 import com.example.carslux.utils.NavHelper.navigateWithBundle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.catch
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment(), FavoritesListener {
@@ -39,7 +43,16 @@ class FavoritesFragment : Fragment(), FavoritesListener {
         binding.favRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favRecyclerView.adapter = favoritesAdapter
 
-        viewModel.getFavorites()
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.showFavorite.catch {
+                Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT).show()
+            }.collect { flowList ->
+                flowList.collect { list ->
+                    favoritesAdapter.submitList(list)
+                }
+            }
+        }
+
 
         viewModel.favorites.observe(viewLifecycleOwner){
             favoritesAdapter.submitList(it)

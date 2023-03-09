@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.carslux.R
 import com.example.carslux.domain.CarsInteractor
+import com.example.carslux.domain.model.CarsModel
 import com.example.carslux.domain.model.FavoriteModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,23 +20,14 @@ class FavoritesViewModel @Inject constructor(
     private val carsInteractor: CarsInteractor
 ) : ViewModel() {
 
+    val showFavorite = flow<Flow<List<FavoriteModel>>>{emit(carsInteractor.getFavorites())}
+
     private val _favorites = MutableLiveData<List<FavoriteModel>>()
     val favorites = _favorites
 
     private val _bundel = MutableLiveData<NavigateFavorites?>()
     val bundel: LiveData<NavigateFavorites?> = _bundel
 
-
-    fun getFavorites() {
-        viewModelScope.launch {
-            try {
-                val favorites = carsInteractor.getFavorites()
-                _favorites.value = favorites
-            } catch (e: Exception) {
-                Log.w("Fav error", e.toString())
-            }
-        }
-    }
 
 
     fun elementSelectFav(

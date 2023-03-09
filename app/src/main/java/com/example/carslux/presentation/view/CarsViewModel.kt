@@ -10,6 +10,8 @@ import com.example.carslux.R
 import com.example.carslux.domain.CarsInteractor
 import com.example.carslux.domain.model.CarsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,8 +20,8 @@ class CarsViewModel @Inject constructor(
     private val carsInteractor: CarsInteractor
 ) : ViewModel() {
 
-    private val _cars = MutableLiveData<List<CarsModel>>()
-    val cars: LiveData<List<CarsModel>> = _cars
+    val showCars = flow<Flow<List<CarsModel>>>{emit(carsInteractor.showCars())}
+    val getCars = flow {emit(carsInteractor.getCars())  }
 
     private val _msg = MutableLiveData<Int>()
     val msg: LiveData<Int> = _msg
@@ -27,17 +29,6 @@ class CarsViewModel @Inject constructor(
     private val _bundel = MutableLiveData<NavigateParametrs?>()
     val bundel: LiveData<NavigateParametrs?> = _bundel
 
-    fun getCars() {
-        viewModelScope.launch {
-            try {
-                carsInteractor.getCars()
-                val listCars = carsInteractor.showCars()
-                _cars.value = listCars
-            } catch (e: Exception) {
-
-            }
-        }
-    }
 
     fun imageViewClicked() {
         _msg.value = R.string.Click_on_picture

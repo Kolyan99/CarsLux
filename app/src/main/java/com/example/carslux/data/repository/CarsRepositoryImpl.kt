@@ -1,5 +1,6 @@
 package com.example.carslux.data.repository
 
+import android.util.Log
 import com.example.carslux.data.database.CarsEntity
 import com.example.carslux.data.database.dao.CarsDao
 import com.example.carslux.data.database.dao.FavoritesEntity
@@ -8,6 +9,8 @@ import com.example.carslux.domain.CarsRepository
 import com.example.carslux.domain.model.CarsModel
 import com.example.carslux.domain.model.FavoriteModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -18,38 +21,42 @@ class CarsRepositoryImpl @Inject constructor(
 
     override suspend fun getCar() {
         return withContext(Dispatchers.IO) {
-
-            if (!carsDao.doesCarsEntityExist()) {
-                val response = apiService.getCar()
-                response.body()?.sampleList?.let {
-                    it.map {
-                        val carsEntity = CarsEntity(
-                            it.id,
-                            it.modelCar,
-                            it.imageCar,
-                            it.engine,
-                            it.informationMachines,
-                            it.photo
-                        )
-                        carsDao.insertCarsEntity(carsEntity)
+            carsDao.doesCarsEntityExist().collect {
+                if (!it) {
+                    val response = apiService.getCar()
+                    Log.w("get", response.body()?.sampleList.toString())
+                    response.body()?.sampleList?.let {
+                        it.map {
+                            val carsEntity = CarsEntity(
+                                it.id,
+                                it.modelCar,
+                                it.imageCar,
+                                it.engine,
+                                it.informationMachines,
+                                it.photo
+                            )
+                            carsDao.insertCarsEntity(carsEntity)
+                        }
                     }
                 }
             }
         }
     }
 
-    override suspend fun showCar(): List<CarsModel> {
+    override suspend fun showCar(): Flow<List<CarsModel>> {
         return withContext(Dispatchers.IO) {
             val carsEntity = carsDao.getCarsEntities()
-            carsEntity.map {
-                CarsModel(
-                    it.id,
-                    it.modelCar,
-                    it.imageCar,
-                    it.engine,
-                    it.informationMachines,
-                    it.photo
-                )
+            carsEntity.map { carsList ->
+                carsList.map { car->
+                    CarsModel(
+                        car.id,
+                        car.modelCar,
+                        car.imageCar,
+                        car.engine,
+                        car.informationMachines,
+                        car.photo
+                    )
+                }
             }
         }
     }
@@ -87,21 +94,24 @@ class CarsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getFavorites(): List<FavoriteModel> {
+    override suspend fun getFavorites(): Flow<List<FavoriteModel>> {
        return withContext(Dispatchers.IO){
             val favoriteEntity = carsDao.getFavoritesEntities()
-            favoriteEntity.map {
-                FavoriteModel(
-                    it.id,
-                    it.modelCar,
-                    it.imageCar,
-                    it.engine,
-                    it.informationMachines,
-                    it.photo
-                )
+            favoriteEntity.map { favoriteList ->
+                favoriteList.map { favorit ->
+                    FavoriteModel(
+                        favorit.id,
+                        favorit.modelCar,
+                        favorit.imageCar,
+                        favorit.engine,
+                        favorit.informationMachines,
+                        favorit.photo
+                    )
+                }
             }
-        }
+       }
     }
+
 
     override suspend fun deleteFavorite(id: Int) {
         withContext(Dispatchers.IO){

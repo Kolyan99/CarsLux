@@ -3,6 +3,7 @@ package com.example.carslux.domain
 import androidx.lifecycle.ViewModelProvider
 import com.example.carslux.domain.model.CarsModel
 import com.example.carslux.domain.model.FavoriteModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CarsInteractor @Inject constructor(
@@ -13,7 +14,7 @@ class CarsInteractor @Inject constructor(
         return carsRepository.getCar()
     }
 
-    suspend fun showCars(): List<CarsModel>{
+    suspend fun showCars(): Flow<List<CarsModel>>{
         return carsRepository.showCar()
     }
 
@@ -30,7 +31,7 @@ class CarsInteractor @Inject constructor(
         carsRepository.favClick(foundItem)
     }
 
-    suspend fun getFavorites(): List<FavoriteModel>{
+    suspend fun getFavorites(): Flow<List<FavoriteModel>>{
         return carsRepository.getFavorites()
     }
 
