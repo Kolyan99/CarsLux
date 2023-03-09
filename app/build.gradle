@@ -13,6 +13,7 @@ android {
         dataBinding = true
     }
 
+
     defaultConfig {
         applicationId "com.example.carslux"
         minSdk 30

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,8 @@ import com.example.carslux.utils.Constants.INFORMATIONMACHINES
 import com.example.carslux.utils.Constants.PHOTO
 import com.example.carslux.utils.NavHelper.navigateWithBundle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CarsFragment : Fragment(), CarsListener {
@@ -48,10 +51,19 @@ class CarsFragment : Fragment(), CarsListener {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = carsAdapter
 
-        viewModel.getCars()
 
-        viewModel.cars.observe(viewLifecycleOwner) { listCar ->
-            carsAdapter.submitList(listCar)
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.getCars.collect()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.showCars.catch {
+                Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT).show()
+            }.collect { flowList ->
+                flowList.collect { list ->
+                    carsAdapter.submitList(list)
+                }
+            }
         }
 
         viewModel.msg.observe(viewLifecycleOwner) { msg ->
