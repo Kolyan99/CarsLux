@@ -1,6 +1,7 @@
 package com.example.carslux.presentation.adapter.cars
 
 import android.net.Uri
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.databinding.CarsModelBinding
 import com.example.carslux.domain.model.CarsModel
@@ -12,9 +13,11 @@ class CarsViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
+
     fun bind(carsModel: CarsModel) {
         binding.name.text = carsModel.modelCar
         Picasso.get().load(Uri.parse(carsModel.imageCar)).into(binding.carImage)
+
 
         binding.carImage.setOnClickListener {
             carsListener.onClick()
@@ -41,7 +44,9 @@ class CarsViewHolder(
         }
 
         binding.carFav.setOnClickListener {
+            binding.carFav.isSelected = !it.isSelected
             carsListener.onFavClick(carsModel.id)
+
         }
     }
 }

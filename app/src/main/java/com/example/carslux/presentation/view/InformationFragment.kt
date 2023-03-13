@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.carslux.R
@@ -53,7 +54,7 @@ class InformationFragment : Fragment() {
             binding.informationmachince.text = infomachince
             Picasso.get().load(Uri.parse(photo)).into(binding.infoPhoto)
 
-
         }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.example.carslux.presentation.view
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.carslux.R
 import com.example.carslux.databinding.FragmentFavoritesBinding
 import com.example.carslux.domain.model.FavoriteModel
 import com.example.carslux.presentation.adapter.favorit.FavoritesAdapter
@@ -43,6 +46,12 @@ class FavoritesFragment : Fragment(), FavoritesListener {
         binding.favRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favRecyclerView.adapter = favoritesAdapter
 
+        if (context?.let { checkcontext(it) } == true){
+            Toast.makeText(context, getString(R.string.internet_up), Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(context, getString(R.string.internet_down), Toast.LENGTH_LONG).show()
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.showFavorite.catch {
                 Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -72,6 +81,12 @@ class FavoritesFragment : Fragment(), FavoritesListener {
             }
         }
 
+    }
+
+    private fun checkcontext(context: Context): Boolean{
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo !=null && networkInfo.isConnected
     }
 
     override fun onDeleteFavorite(id: Int) {

@@ -8,4 +8,7 @@
     <string name="text_preview">Luxury Cars from USA</string>
     <string name="cars">Cars</string>
     <string name="favorite">Favorite</string>
+    <string name="no_internet">No Link</string>
+    <string name="internet_up">Connected to the Internet</string>
+    <string name="internet_down">\"Еhe Internet is disconnected check the connection \"</string>
 </resources>

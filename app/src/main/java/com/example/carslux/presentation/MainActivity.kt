@@ -1,5 +1,6 @@
 package com.example.carslux.presentation
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,12 +35,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+
         val navHostFragment = supportFragmentManager.findFragmentById(
             R.id.fragmentContainerView
         ) as NavHostFragment
 
         navController = navHostFragment.navController
-        navController
+
 
 
         binding.bottomNavigation.setupWithNavController(navController)
@@ -51,5 +53,6 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigation.visibility = View.VISIBLE
             }
         }
+
     }
 }

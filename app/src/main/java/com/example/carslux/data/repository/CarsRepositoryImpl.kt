@@ -47,7 +47,7 @@ class CarsRepositoryImpl @Inject constructor(
         return withContext(Dispatchers.IO) {
             val carsEntity = carsDao.getCarsEntities()
             carsEntity.map { carsList ->
-                carsList.map { car->
+                carsList.map { car ->
                     CarsModel(
                         car.id,
                         car.modelCar,
@@ -62,13 +62,14 @@ class CarsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteCar(id: Int) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             carsDao.deleteCarEntityById(id)
         }
     }
 
+
     override suspend fun findItemEntityById(id: Int): CarsModel {
-      return  withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             val carsEntity = carsDao.findItemEntityById(id)
             CarsModel(
                 carsEntity.id,
@@ -82,20 +83,22 @@ class CarsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun favClick(carsModel: CarsModel) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             carsDao.insertFavoritesEntity(
-                FavoritesEntity(carsModel.id,
-                carsModel.modelCar,
-                carsModel.imageCar,
-                carsModel.engine,
-                carsModel.informationMachines,
-                carsModel.photo)
+                FavoritesEntity(
+                    carsModel.id,
+                    carsModel.modelCar,
+                    carsModel.imageCar,
+                    carsModel.engine,
+                    carsModel.informationMachines,
+                    carsModel.photo
+                )
             )
         }
     }
 
     override suspend fun getFavorites(): Flow<List<FavoriteModel>> {
-       return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             val favoriteEntity = carsDao.getFavoritesEntities()
             favoriteEntity.map { favoriteList ->
                 favoriteList.map { favorit ->
@@ -109,15 +112,16 @@ class CarsRepositoryImpl @Inject constructor(
                     )
                 }
             }
-       }
+        }
     }
 
 
     override suspend fun deleteFavorite(id: Int) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             carsDao.deleteFavoritesEntityId(id)
         }
     }
+
 }
 
 
