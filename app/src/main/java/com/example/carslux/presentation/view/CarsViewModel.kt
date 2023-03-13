@@ -1,7 +1,7 @@
 package com.example.carslux.presentation.view
 
 import android.provider.Settings.System.getString
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.carslux.R
 import com.example.carslux.domain.CarsInteractor
 import com.example.carslux.domain.model.CarsModel
+import com.example.carslux.utils.InternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -20,8 +21,11 @@ class CarsViewModel @Inject constructor(
     private val carsInteractor: CarsInteractor
 ) : ViewModel() {
 
-    val showCars = flow<Flow<List<CarsModel>>>{emit(carsInteractor.showCars())}
-    val getCars = flow {emit(carsInteractor.getCars())  }
+    val showCars = flow<Flow<List<CarsModel>>>{ emit(carsInteractor.showCars()) }
+    val getCars = flow { emit(carsInteractor.getCars()) }
+
+    private val _error = MutableLiveData<Int>()
+    val error: LiveData<Int> = _error
 
     private val _msg = MutableLiveData<Int>()
     val msg: LiveData<Int> = _msg

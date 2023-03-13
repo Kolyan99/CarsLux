@@ -22,6 +22,7 @@ class CarsInteractor @Inject constructor(
          carsRepository.deleteCar(id)
     }
 
+
     suspend fun findItemEntityById(id: Int){
         carsRepository.findItemEntityById(id)
     }

@@ -20,7 +20,7 @@ class FavoritesViewModel @Inject constructor(
     private val carsInteractor: CarsInteractor
 ) : ViewModel() {
 
-    val showFavorite = flow<Flow<List<FavoriteModel>>>{emit(carsInteractor.getFavorites())}
+    val showFavorite = flow<Flow<List<FavoriteModel>>>{ emit(carsInteractor.getFavorites())}
 
     private val _favorites = MutableLiveData<List<FavoriteModel>>()
     val favorites = _favorites

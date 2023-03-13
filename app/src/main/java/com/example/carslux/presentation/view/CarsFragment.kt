@@ -1,14 +1,20 @@
 package com.example.carslux.presentation.view
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carslux.R
@@ -21,6 +27,7 @@ import com.example.carslux.presentation.adapter.cars.CarsListener
 import com.example.carslux.utils.Constants.INFORMATIONMACHINES
 import com.example.carslux.utils.Constants.PHOTO
 import com.example.carslux.utils.NavHelper.navigateWithBundle
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -34,6 +41,7 @@ class CarsFragment : Fragment(), CarsListener {
 
     private var _binding: FragmentCarsBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +59,11 @@ class CarsFragment : Fragment(), CarsListener {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = carsAdapter
 
+        if (context?.let { checkcontext(it) } == true){
+            Toast.makeText(context, getString(R.string.internet_up), Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(context, getString(R.string.internet_down), Toast.LENGTH_LONG).show()
+        }
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.getCars.collect()
@@ -70,6 +83,11 @@ class CarsFragment : Fragment(), CarsListener {
             Toast.makeText(context, getString(msg), Toast.LENGTH_SHORT).show()
         }
 
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            Toast.makeText(context, getString(error), Toast.LENGTH_SHORT).show()
+
+        }
+
         viewModel.bundel.observe(viewLifecycleOwner) { navBundel ->
             if (navBundel != null) {
                 val bundle = Bundle()
@@ -85,6 +103,13 @@ class CarsFragment : Fragment(), CarsListener {
                 viewModel.userNavigated()
             }
         }
+
+    }
+
+  private fun checkcontext(context: Context): Boolean{
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo !=null && networkInfo.isConnected
     }
 
     override fun onClick() {
@@ -109,7 +134,11 @@ class CarsFragment : Fragment(), CarsListener {
     override fun onFavClick(id: Int) {
         viewModel.onFavClick(id)
     }
+
+
 }
+
+
 
 
 
