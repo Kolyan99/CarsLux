@@ -131,8 +131,8 @@ class CarsFragment : Fragment(), CarsListener {
         viewModel.deleteCar(id)
     }
 
-    override fun onFavClick(id: Int) {
-        viewModel.onFavClick(id)
+    override fun onFavClick(id: Int, isFavorite: Boolean) {
+        viewModel.onFavClick(id, isFavorite)
     }
 
 

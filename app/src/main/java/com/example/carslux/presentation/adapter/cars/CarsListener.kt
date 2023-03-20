@@ -8,5 +8,5 @@ interface CarsListener {
 
     fun onDeleteCar(id: Int)
 
-    fun onFavClick(id: Int)
+    fun onFavClick(id: Int, isFavorite: Boolean)
 }

@@ -33,6 +33,9 @@ interface CarsDao {
     @Query("SELECT * FROM FavoritesEntity ")
     fun getFavoritesEntities(): Flow<List<FavoritesEntity>>
 
+    @Query("UPDATE CarsEntity SET isFavorite = :isFavorite WHERE id =:id " )
+    fun addFavorite(id: Int, isFavorite: Boolean)
+
     @Query("DELETE FROM FavoritesEntity WHERE id =:id")
     fun deleteFavoritesEntityId(id: Int)
 

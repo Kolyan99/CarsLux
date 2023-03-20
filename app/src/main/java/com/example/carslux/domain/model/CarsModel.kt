@@ -6,5 +6,6 @@ data class CarsModel (
     val imageCar: String,
     val engine: String,
     val informationMachines: String,
-    val photo: String
+    val photo: String,
+    val isFavorite: Boolean
         )

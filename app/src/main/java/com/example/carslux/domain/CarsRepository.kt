@@ -14,7 +14,7 @@ interface CarsRepository {
 
    suspend fun findItemEntityById(id: Int): CarsModel
 
-   suspend fun favClick(carsModel: CarsModel)
+   suspend fun favClick(carsModel: CarsModel, isFavorite: Boolean )
 
    suspend fun getFavorites(): Flow<List<FavoriteModel>>
 
