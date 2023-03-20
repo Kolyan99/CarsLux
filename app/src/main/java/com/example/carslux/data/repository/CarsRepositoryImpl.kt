@@ -54,7 +54,8 @@ class CarsRepositoryImpl @Inject constructor(
                         car.imageCar,
                         car.engine,
                         car.informationMachines,
-                        car.photo
+                        car.photo,
+                        car.isFavorite?: false
                     )
                 }
             }
@@ -77,13 +78,17 @@ class CarsRepositoryImpl @Inject constructor(
                 carsEntity.imageCar,
                 carsEntity.engine,
                 carsEntity.informationMachines,
-                carsEntity.photo
+                carsEntity.photo,
+                carsEntity.isFavorite?: false
             )
         }
     }
 
-    override suspend fun favClick(carsModel: CarsModel) {
+    override suspend fun favClick(carsModel: CarsModel, isFavorite: Boolean) {
         withContext(Dispatchers.IO) {
+            carsDao.addFavorite(carsModel.id,
+                isFavorite
+            )
             carsDao.insertFavoritesEntity(
                 FavoritesEntity(
                     carsModel.id,

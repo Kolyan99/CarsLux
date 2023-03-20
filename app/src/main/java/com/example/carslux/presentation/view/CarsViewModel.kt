@@ -68,9 +68,9 @@ class CarsViewModel @Inject constructor(
         }
     }
 
-    fun onFavClick(id: Int) {
+    fun onFavClick(id: Int, isFavorite: Boolean) {
         viewModelScope.launch {
-            carsInteractor.onFavClick(id)
+            carsInteractor.onFavClick(id, isFavorite)
         }
     }
 }

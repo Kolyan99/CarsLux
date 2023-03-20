@@ -43,9 +43,11 @@ class CarsViewHolder(
             carsListener.onDeleteCar(carsModel.id)
         }
 
+        binding.carFav.isSelected = carsModel.isFavorite
+
         binding.carFav.setOnClickListener {
             binding.carFav.isSelected = !it.isSelected
-            carsListener.onFavClick(carsModel.id)
+            carsListener.onFavClick(carsModel.id, it.isSelected)
 
         }
     }

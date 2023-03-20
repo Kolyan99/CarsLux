@@ -18,5 +18,7 @@ data class CarsEntity(
     @ColumnInfo(name = "informationMachines")
     val informationMachines: String,
     @ColumnInfo(name = "photo")
-    val photo: String
+    val photo: String,
+    @ColumnInfo(name = "isFavorite")
+    val isFavorite: Boolean?=false
 )

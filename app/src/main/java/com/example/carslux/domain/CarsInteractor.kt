@@ -27,9 +27,9 @@ class CarsInteractor @Inject constructor(
         carsRepository.findItemEntityById(id)
     }
 
-    suspend fun onFavClick(id: Int){
+    suspend fun onFavClick(id: Int, isFavorite: Boolean){
         val foundItem = carsRepository.findItemEntityById(id)
-        carsRepository.favClick(foundItem)
+        carsRepository.favClick(foundItem, isFavorite)
     }
 
     suspend fun getFavorites(): Flow<List<FavoriteModel>>{
