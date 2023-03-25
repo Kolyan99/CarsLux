@@ -46,11 +46,6 @@ class FavoritesFragment : Fragment(), FavoritesListener {
         binding.favRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favRecyclerView.adapter = favoritesAdapter
 
-        if (context?.let { checkcontext(it) } == true){
-            Toast.makeText(context, getString(R.string.internet_up), Toast.LENGTH_LONG).show()
-        }else{
-            Toast.makeText(context, getString(R.string.internet_down), Toast.LENGTH_LONG).show()
-        }
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.showFavorite.catch {
@@ -83,11 +78,6 @@ class FavoritesFragment : Fragment(), FavoritesListener {
 
     }
 
-    private fun checkcontext(context: Context): Boolean{
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo !=null && networkInfo.isConnected
-    }
 
     override fun onDeleteFavorite(id: Int) {
         viewModel.deleteFavorite(id)
@@ -103,5 +93,4 @@ class FavoritesFragment : Fragment(), FavoritesListener {
     ) {
         viewModel.elementSelectFav(id, modelCar, imageCar, engine, informationMachines, photo)
     }
-
 }
