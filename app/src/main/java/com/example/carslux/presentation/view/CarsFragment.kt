@@ -59,12 +59,6 @@ class CarsFragment : Fragment(), CarsListener {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = carsAdapter
 
-        if (context?.let { checkcontext(it) } == true){
-            Toast.makeText(context, getString(R.string.internet_up), Toast.LENGTH_LONG).show()
-        }else{
-            Toast.makeText(context, getString(R.string.internet_down), Toast.LENGTH_LONG).show()
-        }
-
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.getCars.collect()
         }
@@ -106,12 +100,6 @@ class CarsFragment : Fragment(), CarsListener {
 
     }
 
-  private fun checkcontext(context: Context): Boolean{
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo !=null && networkInfo.isConnected
-    }
-
     override fun onClick() {
         viewModel.imageViewClicked()
     }
@@ -134,8 +122,6 @@ class CarsFragment : Fragment(), CarsListener {
     override fun onFavClick(id: Int, isFavorite: Boolean) {
         viewModel.onFavClick(id, isFavorite)
     }
-
-
 }
 
 

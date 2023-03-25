@@ -1,9 +1,16 @@
 package com.example.carslux.presentation
 
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,6 +26,7 @@ import com.example.carslux.databinding.ActivityMainBinding
 import com.example.carslux.presentation.view.CarsFragment
 import com.example.carslux.presentation.view.FavoritesFragment
 import com.example.carslux.presentation.view.PreviewFragment
+import com.example.carslux.utils.NetworkConnection
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,12 +44,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        val inflater = findViewById<View>(R.id.tvNetworkError)
+        val networkConnection = NetworkConnection(applicationContext)
+        networkConnection.observe(this){
+            if (it){
+                Toast.makeText(this, getString(R.string.Connect_internet), Toast.LENGTH_SHORT).show()
+                inflater.visibility = View.GONE
+            }else{
+                Toast.makeText(this,getString(R.string.Disconnect), Toast.LENGTH_SHORT).show()
+                inflater.visibility = View.VISIBLE
+            }
+        }
+
+
         val navHostFragment = supportFragmentManager.findFragmentById(
             R.id.fragmentContainerView
         ) as NavHostFragment
 
         navController = navHostFragment.navController
-
 
 
         binding.bottomNavigation.setupWithNavController(navController)
@@ -53,6 +73,6 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigation.visibility = View.VISIBLE
             }
         }
-
     }
 }
+
