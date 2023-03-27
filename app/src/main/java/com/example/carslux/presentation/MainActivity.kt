@@ -1,31 +1,19 @@
 package com.example.carslux.presentation
 
-import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
-import android.widget.Button
+import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.carslux.R
 import com.example.carslux.databinding.ActivityMainBinding
-import com.example.carslux.presentation.view.CarsFragment
-import com.example.carslux.presentation.view.FavoritesFragment
-import com.example.carslux.presentation.view.PreviewFragment
 import com.example.carslux.utils.NetworkConnection
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +31,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+        val switch: Switch = findViewById(R.id.them)
+        val sharedPreferences = getSharedPreferences(getString(R.string.Mode), Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val nightMode = sharedPreferences.getBoolean(getString(R.string.Key), false)
+
+        if(nightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
+        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                editor.putBoolean(getString(R.string.Key), false)
+                editor.apply()
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                editor.putBoolean(getString(R.string.Key), true)
+                editor.apply()
+
+            }
+        }
 
         val inflater = findViewById<View>(R.id.tvNetworkError)
         val networkConnection = NetworkConnection(applicationContext)
@@ -75,4 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
+
 

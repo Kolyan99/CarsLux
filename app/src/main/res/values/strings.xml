@@ -15,4 +15,6 @@
     <string name="Disconnect">Internet is disconnected</string>
     <string name="text_network">Oops !!!</string>
     <string name="error_network">No internet connection \n Check your internet connection</string>
+    <string name="Key">night</string>
+    <string name="Mode">Mode</string>
 </resources>
